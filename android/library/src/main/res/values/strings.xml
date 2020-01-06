@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">sdk</string>
+
+    <string name="init_sdk_successfully">init SDK</string>
+
+    <string name="jump_activity">activity to -> \</string>
+
+    <string name="apply_permission">apply permission about \</string>
+    <string name="callback_permissions_about">call back about applying for permission of \</string>
+
+</resources>
