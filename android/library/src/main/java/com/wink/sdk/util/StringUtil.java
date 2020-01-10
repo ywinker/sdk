@@ -1,6 +1,9 @@
 package com.wink.sdk.util;
 
 import android.content.Context;
+import android.text.TextUtils;
+
+import com.wink.sdk.R;
 
 import java.lang.ref.WeakReference;
 
@@ -14,36 +17,44 @@ import java.lang.ref.WeakReference;
  */
 public class StringUtil {
 
+    /**
+     * 填入数据的格式（用于检测） 1:手机号码 2：密码 3：验证码 4：图片验证码
+     */
+    public final static int FORMAT_PHONE = 1;
+    public final static int FORMAT_PASSWORD = 2;
+    public final static int FORMAT_VERIFY_CODE= 3;
+    public final static int FORMAT_GRAPHIC_VERIFY_CODE= 4;
+
     private static WeakReference<Context> contextWeakReference = null;
 
     public static String txtformatDetection(Context context, int format, String txt){
         contextWeakReference = new WeakReference<>(context.getApplicationContext());
         String log = "";
-        /*switch (format){
-            case FormLoginItemView.FORMAT_PHONE:
+        switch (format){
+            case FORMAT_PHONE:
                 if (TextUtils.isEmpty(txt)){
                     log = contextWeakReference.get().getString(R.string.phone_is_empty);
                 }else if (!isMobileNO(txt)){
                     log = contextWeakReference.get().getString(R.string.phone_error);
                 }
                 break;
-            case FormLoginItemView.FORMAT_PASSWORD:
+            case FORMAT_PASSWORD:
                 if (TextUtils.isEmpty(txt)){
                     log = contextWeakReference.get().getString(R.string.password_is_empty);
                 }else if (txt.length() < 5 || txt.length() > 16){
                     log = contextWeakReference.get().getString(R.string.password_length_error);
                 }
                 break;
-            case FormLoginItemView.FORMAT_VERIFY_CODE:
+            case FORMAT_VERIFY_CODE:
                 if (TextUtils.isEmpty(txt)){
                     log = contextWeakReference.get().getString(R.string.code_is_empty);
                 }
-            case FormLoginItemView.FORMAT_GRAPHIC_VERIFY_CODE:
+            case FORMAT_GRAPHIC_VERIFY_CODE:
                 if (TextUtils.isEmpty(txt)){
                     log = contextWeakReference.get().getString(R.string.code_is_empty);
                 }
                 break;
-        }*/
+        }
 
         return log;
     }

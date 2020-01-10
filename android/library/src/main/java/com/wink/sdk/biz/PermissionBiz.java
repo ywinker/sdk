@@ -40,6 +40,9 @@ public abstract class PermissionBiz {
     public static String[] STORAGE_PERMISSION = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission
             .WRITE_EXTERNAL_STORAGE};
 
+    //申请获取手机信息授权
+    public static String PHONE_INFO = Manifest.permission.READ_PHONE_STATE;
+
     /**
      * 检查相应权限，并申请未授权的部分
      */

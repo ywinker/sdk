@@ -22,9 +22,8 @@ import java.util.Locale;
  * 作者：    yingzy
  */
 public class LoggerManger {
-    public static LoggerManger instance = null;
 
-    private String path = LocalInfo.WINKER_FILE_DIR;
+    public static LoggerManger instance = null;
 
     private WeakReference<Context> contextWeakReference = null;
 
@@ -51,6 +50,8 @@ public class LoggerManger {
     public void init(Context context, boolean writeLoggerEnable){
         contextWeakReference = new WeakReference<>(context);
         this.writeLoggerEnable = writeLoggerEnable;
+
+        writeSDKLoggerAddTime("- init LoggerManger");
     }
 
     public void writeSDKLoggerAddTime(int id, String logger){
@@ -62,6 +63,8 @@ public class LoggerManger {
     }
 
     public void writeSDKLoggerAddTime(String log){
+        if(!writeLoggerEnable) return;
+
         this.logger = "";
 
         SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss  ", Locale.CHINA);
@@ -74,11 +77,11 @@ public class LoggerManger {
 
     private void writeSDKLogger(String logger){
         try {
-            if (!createFile()) return;
+            if (!FileManager.getInstance().createProjectFile()) return;
 
             if (!createLogger()) return;
 
-            File file = new File(path + LocalInfo.LOGGER_FILE);
+            File file = new File(LocalInfo.getProjectFilesPath());
 
             if (isFirstLogger){
                 logger ="\r\n" + R.string.init_sdk_successfully + contextWeakReference.get().getString(R.string
@@ -100,7 +103,7 @@ public class LoggerManger {
     }
 
     private boolean createLogger() throws Exception{
-        File loggerFile = new File(path + LocalInfo.LOGGER_FILE);
+        File loggerFile = new File(LocalInfo.getLoggerFilePath());
 
         if (loggerFile.exists()){
             return true;
@@ -109,21 +112,8 @@ public class LoggerManger {
         return loggerFile.createNewFile();
     }
 
-    private boolean createFile() throws Exception{
-        File baseFile = new File(path);
-
-        if (baseFile.exists()){
-
-            return true;
-        }else {
-            isFirstLogger = true;
-        }
-
-       return baseFile.mkdir();
-    }
-
     public void setPath(String path) {
-        this.path = path;
+        LocalInfo.loggerFilePath = LocalInfo.getProjectFilesPath() + path;
     }
 
     private Runnable writeLoggerRunn = new Runnable() {

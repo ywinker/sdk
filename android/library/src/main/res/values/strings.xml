@@ -8,4 +8,12 @@
     <string name="apply_permission">apply permission about \</string>
     <string name="callback_permissions_about">call back about applying for permission of \</string>
 
+    <string name="shoot_screen">shoot the full windows‘screen</string>
+    <string name="open_local_picture">open restored file by findding picture</string>
+
+    <string name="phone_is_empty">手机号码不可为空！</string>
+    <string name="phone_error">请输入有效的手机号码！</string>
+    <string name="password_is_empty">密码不能为空！</string>
+    <string name="password_length_error">密码长度范围为6到16！</string>
+    <string name="code_is_empty">验证码不能为空！</string>
 </resources>
